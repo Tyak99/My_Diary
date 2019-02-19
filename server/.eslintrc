@@ -1,6 +1,6 @@
 {
+  "extends": "airbnb-base",
   "parserOptions": {
     "sourceType": "module"
-  },
-  "extends": "airbnb-base"
+  }
 }
