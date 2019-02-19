@@ -3,7 +3,7 @@ export default class Entry {
     this.id = null;
     this.title = null;
     this.body = null;
-    this.createdAt = new Date();
-    this.updatedAt = new Date();
+    this.createdAt = null;
+    this.updatedAt = null;
   }
 }
