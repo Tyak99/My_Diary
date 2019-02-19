@@ -10,7 +10,21 @@ router.get('/', (req, res) => {
     status: 'success',
     data: entries,
   });
-  //   res.send('you are here');
+});
+
+router.get('/:id', (req, res) => {
+  const Entryid = req.params.id;
+  const foundEntry = entryServices.get(Entryid);
+  if (!foundEntry) {
+    res.send({
+      status: 'error',
+      message: 'No entry with this id found',
+    });
+  }
+  res.send({
+    status: 'success',
+    data: foundEntry,
+  });
 });
 
 export default router;
