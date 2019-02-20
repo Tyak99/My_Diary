@@ -134,4 +134,45 @@ describe('Entry Tests', () => {
         });
     });
   });
+  describe('DELETE /api/v1/entry:id', () => {
+    it('should check if an id is passed at all', (done) => {
+      chai
+        .request(server)
+        .delete('/api/v1/entry/')
+        .end((err, res) => {
+          expect(res.status).to.eql(404);
+          done();
+        });
+    });
+    it('should check for an incorrect id', (done) => {
+      chai
+        .request(server)
+        .delete('/api/v1/entry/wrongid')
+        .end((err, res) => {
+          expect(res.status).to.eql(200);
+          expect(res.body)
+            .have.property('status')
+            .eql('error');
+          expect(res.body)
+            .have.property('message')
+            .eql('no entry with that id found');
+          done();
+        });
+    });
+    it('delete successfully', (done) => {
+      chai
+        .request(server)
+        .delete('/api/v1/entry/1')
+        .end((err, res) => {
+          expect(res.status).to.eql(200);
+          expect(res.body)
+            .have.property('status')
+            .eql('success');
+          expect(res.body)
+            .have.property('message')
+            .eql('entry deleted successfully');
+          done();
+        });
+    });
+  });
 });
