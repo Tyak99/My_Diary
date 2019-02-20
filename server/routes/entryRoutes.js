@@ -20,11 +20,12 @@ router.get('/:id', (req, res) => {
       status: 'error',
       message: 'No entry with this id found',
     });
+  } else {
+    res.send({
+      status: 'success',
+      data: foundEntry,
+    });
   }
-  res.send({
-    status: 'success',
-    data: foundEntry,
-  });
 });
 
 export default router;
