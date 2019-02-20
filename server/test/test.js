@@ -14,8 +14,10 @@ describe('Entry Tests', () => {
         .get('/api/v1/entry')
         .end((err, res) => {
           expect(res.status).to.eql(200);
-          expect(res.body.status).to.have.string('success');
-          expect(res.body.data).to.be.a('array');
+          expect(res.body)
+            .have.property('status')
+            .eql('success');
+          expect(res.body.data).to.be.an('array');
           done();
         });
     });
@@ -30,6 +32,15 @@ describe('Entry Tests', () => {
     });
   });
   describe('GET api/v1/entry/:id', () => {
+    it('it should return 404 on wrong api call', (done) => {
+      chai
+        .request(server)
+        .get('api/v1/badentry')
+        .end((err, res) => {
+          expect(res.status).to.eql(404);
+          done();
+        });
+    });
     it('should check if the correct id is provided', (done) => {
       chai
         .request(server)
@@ -52,6 +63,15 @@ describe('Entry Tests', () => {
     });
   });
   describe('POST api/v1/entry', () => {
+    it('it should return 404 on wrong api call', (done) => {
+      chai
+        .request(server)
+        .get('api/v1/badentry')
+        .end((err, res) => {
+          expect(res.status).to.eql(404);
+          done();
+        });
+    });
     it('should not post an entry without body or title', (done) => {
       chai
         .request(server)
@@ -93,6 +113,15 @@ describe('Entry Tests', () => {
     });
   });
   describe('PUT api/v1/entry', () => {
+    it('it should return 404 on wrong api call', (done) => {
+      chai
+        .request(server)
+        .get('api/v1/badentry')
+        .end((err, res) => {
+          expect(res.status).to.eql(404);
+          done();
+        });
+    });
     it('should check if an incorrect id has been passed as params', (done) => {
       chai
         .request(server)
@@ -135,6 +164,15 @@ describe('Entry Tests', () => {
     });
   });
   describe('DELETE /api/v1/entry:id', () => {
+    it('it should return 404 on wrong api call', (done) => {
+      chai
+        .request(server)
+        .get('api/v1/badentry')
+        .end((err, res) => {
+          expect(res.status).to.eql(404);
+          done();
+        });
+    });
     it('should check if an id is passed at all', (done) => {
       chai
         .request(server)
