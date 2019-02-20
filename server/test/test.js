@@ -92,4 +92,46 @@ describe('Entry Tests', () => {
         });
     });
   });
+  describe('PUT api/v1/entry', () => {
+    it('should check if an incorrect id has been passed as params', (done) => {
+      chai
+        .request(server)
+        .put('/api/v1/entry/wrongid')
+        .send()
+        .end((err, res) => {
+          expect(res.status).to.be.eql(200);
+          expect(res.body).to.eql({
+            status: 'error',
+            message: 'no entry with this id found',
+          });
+          done();
+        });
+    });
+    it('should check if no id is passed at all', (done) => {
+      chai
+        .request(server)
+        .put('/api/v1/entry')
+        .send()
+        .end((err, res) => {
+          expect(res.status).to.be.eql(404);
+          done();
+        });
+    });
+    it('should update the diary when passed correct id', (done) => {
+      const diary = {
+        title: 'Updated book',
+        body: 'Hehe bless',
+      };
+      chai
+        .request(server)
+        .put('/api/v1/entry/1')
+        .send(diary)
+        .end((err, res) => {
+          expect(res.status).to.eql(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body.data).to.be.an('object');
+          done();
+        });
+    });
+  });
 });

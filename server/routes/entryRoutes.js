@@ -68,7 +68,7 @@ router.delete('/:id', (req, res) => {
   if (!entry) {
     return res.send({
       status: 'error',
-      message: 'no entry with thta id found',
+      message: 'no entry with that id found',
     });
   }
   entryServices.deleteEntry(req.params.id);
