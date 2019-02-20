@@ -64,4 +64,19 @@ router.put('/:id', (req, res) => {
   });
 });
 
+router.delete('/:id', (req, res) => {
+  const entry = entryServices.get(req.params.id);
+  if (!entry) {
+    return res.send({
+      status: 'error',
+      message: 'no entry with thta id found',
+    });
+  }
+  entryServices.deleteEntry(req.params.id);
+  return res.send({
+    status: 'success',
+    message: 'entry deleted successfully',
+  });
+});
+
 export default router;
