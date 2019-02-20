@@ -29,4 +29,26 @@ describe('Entry Tests', () => {
         });
     });
   });
+  describe('GET a single entry route api/v1/entry/:id', () => {
+    it('should check if the correct id is provided', (done) => {
+      chai
+        .request(server)
+        .get('/api/v1/entry/1')
+        .end((err, res) => {
+          expect(err).to.be.a('null');
+          expect(res).to.have.status(200);
+          expect(res.body.data).to.be.an('object');
+          done();
+        });
+    });
+    it('should respond as error if a wrong id is passed', (done) => {
+      chai
+        .request(server)
+        .get('/api/v1/entry/:wrongid')
+        .end((err, res) => {
+          expect(res.body.status).to.have.string('error');
+          done();
+        });
+    });
+  });
 });
