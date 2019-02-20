@@ -28,4 +28,25 @@ router.get('/:id', (req, res) => {
   }
 });
 
+router.post('/', (req, res) => {
+  const { title, body } = req.body;
+  if (!title || !body) {
+    res.send({
+      status: 'error',
+      message: 'all fields must be present',
+    });
+  }
+  const data = {
+    title,
+    body,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
+  const Getresponse = entryServices.setEntry(data);
+  res.send({
+    status: 'success',
+    data: Getresponse,
+  });
+});
+
 export default router;

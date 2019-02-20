@@ -4,6 +4,8 @@ import entryRoutes from './routes/entryRoutes';
 
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use('/api/v1/entry', entryRoutes);
 
 app.get('/', (req, res) => {
