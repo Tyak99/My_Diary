@@ -41,10 +41,10 @@ router.post('/', (req, res) => {
     createdAt: new Date(),
     updatedAt: new Date(),
   };
-  const Getresponse = entryServices.setEntry(data);
+  entryServices.setEntry(data);
   return res.send({
     status: 'success',
-    data: Getresponse,
+    data,
   });
 });
 
