@@ -49,4 +49,19 @@ router.post('/', (req, res) => {
   });
 });
 
+router.put('/:id', (req, res) => {
+  const entry = entryServices.get(req.params.id);
+  if (!entry) {
+    return res.send({
+      status: 'error',
+      message: 'no entry with this id found',
+    });
+  }
+  const editedEntry = Object.assign(entry, req.body);
+  return res.send({
+    status: 'success',
+    data: editedEntry,
+  });
+});
+
 export default router;
