@@ -1,0 +1,19 @@
+{
+  "name": "diary",
+  "version": "1.0.0",
+  "description": "A Diary app with NodeJs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./server/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tyak99/My_Diary.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tyak99/My_Diary/issues"
+  },
+  "homepage": "https://github.com/Tyak99/My_Diary#readme"
+}
