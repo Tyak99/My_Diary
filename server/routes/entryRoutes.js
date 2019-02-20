@@ -16,22 +16,21 @@ router.get('/:id', (req, res) => {
   const Entryid = req.params.id;
   const foundEntry = entryServices.get(Entryid);
   if (!foundEntry) {
-    res.send({
+    return res.send({
       status: 'error',
       message: 'No entry with this id found',
     });
-  } else {
-    res.send({
-      status: 'success',
-      data: foundEntry,
-    });
   }
+  return res.send({
+    status: 'success',
+    data: foundEntry,
+  });
 });
 
 router.post('/', (req, res) => {
   const { title, body } = req.body;
   if (!title || !body) {
-    res.send({
+    return res.send({
       status: 'error',
       message: 'all fields must be present',
     });
@@ -43,7 +42,7 @@ router.post('/', (req, res) => {
     updatedAt: new Date(),
   };
   const Getresponse = entryServices.setEntry(data);
-  res.send({
+  return res.send({
     status: 'success',
     data: Getresponse,
   });
