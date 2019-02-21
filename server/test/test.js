@@ -24,7 +24,7 @@ describe('Entry Tests', () => {
     it('it should return 404 on wrong api call', (done) => {
       chai
         .request(server)
-        .get('api/bad')
+        .get('/api/bad')
         .end((err, res) => {
           expect(res.status).to.eql(404);
           done();
@@ -35,7 +35,7 @@ describe('Entry Tests', () => {
     it('it should return 404 on wrong api call', (done) => {
       chai
         .request(server)
-        .get('api/v1/badentry')
+        .get('/api/v1/badentry')
         .end((err, res) => {
           expect(res.status).to.eql(404);
           done();
@@ -66,7 +66,7 @@ describe('Entry Tests', () => {
     it('it should return 404 on wrong api call', (done) => {
       chai
         .request(server)
-        .get('api/v1/badentry')
+        .post('/api/v1/badentry')
         .end((err, res) => {
           expect(res.status).to.eql(404);
           done();
@@ -116,7 +116,7 @@ describe('Entry Tests', () => {
     it('it should return 404 on wrong api call', (done) => {
       chai
         .request(server)
-        .get('api/v1/badentry')
+        .put('/api/v1/badentry')
         .end((err, res) => {
           expect(res.status).to.eql(404);
           done();
@@ -167,7 +167,7 @@ describe('Entry Tests', () => {
     it('it should return 404 on wrong api call', (done) => {
       chai
         .request(server)
-        .get('api/v1/badentry')
+        .delete('/api/v1/badentry')
         .end((err, res) => {
           expect(res.status).to.eql(404);
           done();
