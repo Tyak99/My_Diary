@@ -6,7 +6,6 @@ env:
     - CC_TEST_REPORTER_ID=f35cf9c672911efb49c6623212595bda5e1dbf0bfc69dbac90746375431ddef7
 
 install:
-  - cd server
   - npm install
 cache:
   directories:
