@@ -3,17 +3,6 @@
   "version": "1.0.0",
   "description": "A diary app ",
   "main": "app.js",
-  "nyc": {
-    "reporter": [
-      "lcov",
-      "text-summary"
-    ],
-    "require": [
-      "@babel/register"
-    ],
-    "sourceMap": false,
-    "instrument": false
-  },
   "scripts": {
     "start": "nodemon --exec babel-node app.js",
     "test": "nyc mocha --require @babel/register --exit",
