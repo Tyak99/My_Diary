@@ -23,7 +23,7 @@ export default class EntryServices {
       entry.id = data.id;
       entry.title = data.title;
       entry.body = data.body;
-      entry.ccreatedAt = data.createdAt;
+      entry.createdAt = data.createdAt;
       entry.updatedAt = data.updatedAt;
       return data;
     });
