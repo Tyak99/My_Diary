@@ -19,7 +19,7 @@ router.get('/:id', (req, res) => {
     return res.send({
       status: 400,
       data: {
-        message: 'Sorry no entry with that id found',
+        message: 'Sorry, no entry with that id found',
       },
     });
   }
@@ -58,7 +58,7 @@ router.put('/:id', (req, res) => {
     return res.send({
       status: 400,
       data: {
-        message: 'Sorry no entry with that id found',
+        message: 'Sorry, no entry with that id found',
       },
     });
   }
@@ -75,7 +75,7 @@ router.delete('/:id', (req, res) => {
     return res.send({
       status: 400,
       data: {
-        message: 'Sorry no entry with that id found',
+        message: 'Sorry, no entry with that id found',
       },
     });
   }
