@@ -7,7 +7,7 @@ const entryServices = new EntryService();
 router.get('/', (req, res) => {
   const entries = entryServices.getAll();
   res.send({
-    status: 'success',
+    status: 200,
     data: entries,
   });
 });
@@ -17,12 +17,14 @@ router.get('/:id', (req, res) => {
   const foundEntry = entryServices.get(Entryid);
   if (!foundEntry) {
     return res.send({
-      status: 'error',
-      message: 'No entry with this id found',
+      status: 400,
+      data: {
+        message: 'Sorry no entry with that id found',
+      },
     });
   }
   return res.send({
-    status: 'success',
+    status: 200,
     data: foundEntry,
   });
 });
@@ -31,20 +33,22 @@ router.post('/', (req, res) => {
   const { title, body } = req.body;
   if (!title || !body) {
     return res.send({
-      status: 'error',
-      message: 'all fields must be present',
+      status: 400,
+      data: {
+        message: 'Sorry, all fields must be present',
+      },
     });
   }
   const data = {
     title,
     body,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: Date(),
+    updatedAt: Date(),
   };
-  entryServices.setEntry(data);
+  const newData = entryServices.setEntry(data);
   return res.send({
-    status: 'success',
-    data,
+    status: 201,
+    data: newData,
   });
 });
 
@@ -52,13 +56,15 @@ router.put('/:id', (req, res) => {
   const entry = entryServices.get(req.params.id);
   if (!entry) {
     return res.send({
-      status: 'error',
-      message: 'no entry with this id found',
+      status: 400,
+      data: {
+        message: 'Sorry no entry with that id found',
+      },
     });
   }
-  const editedEntry = Object.assign(entry, req.body);
+  const editedEntry = entryServices.editEntry(req.params.id, req.body);
   return res.send({
-    status: 'success',
+    status: 200,
     data: editedEntry,
   });
 });
@@ -67,14 +73,18 @@ router.delete('/:id', (req, res) => {
   const entry = entryServices.get(req.params.id);
   if (!entry) {
     return res.send({
-      status: 'error',
-      message: 'no entry with that id found',
+      status: 400,
+      data: {
+        message: 'Sorry no entry with that id found',
+      },
     });
   }
   entryServices.deleteEntry(req.params.id);
   return res.send({
-    status: 'success',
-    message: 'entry deleted successfully',
+    status: 200,
+    data: {
+      message: 'Entry deleted successfully',
+    },
   });
 });
 

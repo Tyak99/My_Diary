@@ -7,15 +7,15 @@ export default class EntryServices {
         id: 1,
         title: 'My first day out',
         body: 'Lorem ipsum lorem ipsum',
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: Date(),
+        updatedAt: Date(),
       },
       {
         id: 2,
         title: 'My Second Day out',
         body: 'Lorem Lorem Lorem',
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: Date(),
+        updatedAt: Date(),
       },
     ];
     return this.datas.map((data) => {
@@ -42,12 +42,12 @@ export default class EntryServices {
     const newEntry = { id: allEntry.length + 1, ...data };
     allEntry.push(newEntry);
 
-    return allEntry;
+    return newEntry;
   }
 
   editEntry(id, data) {
     const entry = this.fetchAll()[id - 1];
-    const newEntry = Object.assing(entry, data);
+    const newEntry = Object.assign(entry, data);
 
     return newEntry;
   }
