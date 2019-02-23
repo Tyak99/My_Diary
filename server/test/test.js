@@ -13,10 +13,7 @@ describe('Entry Tests', () => {
         .request(server)
         .get('/api/v1/entry')
         .end((err, res) => {
-          expect(res.status).to.eql(200);
-          expect(res.body)
-            .have.property('status')
-            .eql('success');
+          expect(res.body.status).to.eql(200);
           expect(res.body.data).to.be.an('array');
           done();
         });
@@ -57,7 +54,8 @@ describe('Entry Tests', () => {
         .request(server)
         .get('/api/v1/entry/:wrongid')
         .end((err, res) => {
-          expect(res.body.status).to.have.string('error');
+          expect(res.body.status).to.eql(400);
+          expect(res.body.data.message).to.equal('Sorry, no entry with that id found');
           done();
         });
     });
@@ -78,16 +76,16 @@ describe('Entry Tests', () => {
         .post('/api/v1/entry')
         .send({ title: 'My test title' })
         .end((err, res) => {
-          expect(res.body.status).to.have.string('error');
-          expect(res.body.message).to.have.string('all fields must be present');
+          expect(res.body.status).to.eql(400);
+          expect(res.body.data.message).to.have.string('Sorry, all fields must be present');
         });
       chai
         .request(server)
         .post('/api/v1/entry')
         .send({ body: 'My test body' })
         .end((err, res) => {
-          expect(res.body.status).to.have.string('error');
-          expect(res.body.message).to.have.string('all fields must be present');
+          expect(res.body.status).to.eql(400);
+          expect(res.body.data.message).to.have.string('Sorry, all fields must be present');
         });
       done();
     });
@@ -101,8 +99,7 @@ describe('Entry Tests', () => {
         .post('/api/v1/entry')
         .send(diary)
         .end((err, res) => {
-          expect(res.status).to.eql(200);
-          expect(res.body.status).to.equal('success');
+          expect(res.body.status).to.eql(201);
           expect(res.body.data).to.be.an('object');
           expect(res.body.data).to.have.property('title');
           expect(res.body.data).to.have.property('body');
@@ -128,11 +125,8 @@ describe('Entry Tests', () => {
         .put('/api/v1/entry/wrongid')
         .send()
         .end((err, res) => {
-          expect(res.status).to.be.eql(200);
-          expect(res.body).to.eql({
-            status: 'error',
-            message: 'no entry with this id found',
-          });
+          expect(res.body.status).to.eql(400);
+          expect(res.body.data.message).to.equal('Sorry, no entry with that id found');
           done();
         });
     });
@@ -156,8 +150,7 @@ describe('Entry Tests', () => {
         .put('/api/v1/entry/1')
         .send(diary)
         .end((err, res) => {
-          expect(res.status).to.eql(200);
-          expect(res.body).to.be.an('object');
+          expect(res.body.status).to.eql(200);
           expect(res.body.data).to.be.an('object');
           done();
         });
@@ -187,13 +180,10 @@ describe('Entry Tests', () => {
         .request(server)
         .delete('/api/v1/entry/wrongid')
         .end((err, res) => {
-          expect(res.status).to.eql(200);
-          expect(res.body)
-            .have.property('status')
-            .eql('error');
-          expect(res.body)
+          expect(res.body.status).to.eql(400);
+          expect(res.body.data)
             .have.property('message')
-            .eql('no entry with that id found');
+            .eql('Sorry, no entry with that id found');
           done();
         });
     });
@@ -202,13 +192,10 @@ describe('Entry Tests', () => {
         .request(server)
         .delete('/api/v1/entry/1')
         .end((err, res) => {
-          expect(res.status).to.eql(200);
-          expect(res.body)
-            .have.property('status')
-            .eql('success');
-          expect(res.body)
+          expect(res.body.status).to.eql(200);
+          expect(res.body.data)
             .have.property('message')
-            .eql('entry deleted successfully');
+            .eql('Entry deleted successfully');
           done();
         });
     });
